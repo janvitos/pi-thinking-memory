@@ -1,0 +1,51 @@
+{
+  "name": "@janvitos/pi-thinking-memory",
+  "version": "0.1.0",
+  "description": "Remember a separate Pi thinking level for each model.",
+  "type": "module",
+  "license": "MIT",
+  "author": "janvitos",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janvitos/pi-thinking-memory.git"
+  },
+  "keywords": [
+    "pi-package",
+    "pi-coding-agent",
+    "thinking-level",
+    "reasoning-effort",
+    "developer-tools"
+  ],
+  "engines": {
+    "node": ">=22.6"
+  },
+  "files": [
+    "index.ts",
+    "memory.ts",
+    "preferences.ts"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "npm run typecheck && node --experimental-strip-types --test *.test.ts",
+    "prepublishOnly": "npm test"
+  },
+  "dependencies": {
+    "proper-lockfile": "^4.1.2"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/proper-lockfile": "^4.1.4",
+    "typescript": "^5.9.0"
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}
