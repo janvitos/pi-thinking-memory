@@ -1,6 +1,6 @@
 {
   "name": "@janvitos/pi-thinking-memory",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Remember a separate Pi thinking level for each model.",
   "type": "module",
   "license": "MIT",
