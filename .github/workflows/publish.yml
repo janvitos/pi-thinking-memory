@@ -9,9 +9,15 @@ permissions:
   contents: read
   id-token: write
 
+concurrency:
+  group: npm-publish
+  cancel-in-progress: false
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: npm
+    timeout-minutes: 10
 
     steps:
       - name: Check out repository

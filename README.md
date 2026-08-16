@@ -89,14 +89,27 @@ The tests cover schema validation, global storage, concurrent updates, explicit-
 
 ## Publishing
 
-Releases are published to npm by `.github/workflows/publish.yml`. Bump the version in `package.json`, commit it, and push a matching semantic-version tag:
+Releases use npm Trusted Publishing from `.github/workflows/publish.yml`; no long-lived `NPM_TOKEN` GitHub secret is required. Configure the npm package's **Trusted Publisher** with these exact values:
+
+| Setting | Value |
+| --- | --- |
+| Provider | GitHub Actions |
+| GitHub owner | `janvitos` |
+| Repository | `pi-thinking-memory` |
+| Workflow filename | `publish.yml` |
+| Environment | `npm` |
+
+The workflow requests GitHub's OIDC `id-token: write` permission and runs in the protected `npm` environment. You can optionally add deployment reviewers or tag protection to that environment in the GitHub repository settings; do not add an npm token to it.
+
+For each future release, bump both `package.json` and `package-lock.json`, commit and push the change, then push a matching semantic-version tag:
 
 ```bash
-git tag vX.Y.Z
-git push origin main vX.Y.Z
+npm version patch
+# or: npm version minor / npm version major
+git push origin main --follow-tags
 ```
 
-The workflow installs from `package-lock.json`, verifies that the tag matches `package.json`, runs the `prepublishOnly` type-check and tests, and publishes with npm provenance.
+The workflow serializes releases, installs from `package-lock.json`, verifies that the tag equals `v<package.json version>`, runs the `prepublishOnly` type-check and tests, and publishes publicly with npm provenance. Version `0.1.0` was published manually; do not recreate its tag because npm versions are immutable.
 
 ## License
 
